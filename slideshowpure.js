@@ -4,7 +4,6 @@ const slidesInit = () => {
   const listFileName = `${window.location.origin}/web/avatars/list.txt`;
   const jsonCredentials = sessionStorage.getItem("json-credentials");
   const apiKey = sessionStorage.getItem("api-key");
-  const serverId = '4810878e0ca94ff0b08cd0df6e483c4f';
   let userId = null;
   let token = null;
   const deviceId = localStorage.getItem("_deviceId2");
