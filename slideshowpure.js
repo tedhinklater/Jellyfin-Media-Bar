@@ -1,5 +1,5 @@
 const slidesInit = () => {
-  const shuffleInterval = 8000;
+  const shuffleInterval = 115000;
   let isTransitioning = false;
   const listFileName = `${window.location.origin}/web/avatars/list.txt`;
   const jsonCredentials = sessionStorage.getItem("json-credentials");
@@ -31,7 +31,7 @@ const slidesInit = () => {
     const season = item.ChildCount;
     function createSeparator() {
       const separatorHtml =
-        '<i class="material-icons radio_button_off separator-icon"></i>';
+        '<i class="separator-icon"></i>';
       const tempDiv = document.createElement("div");
       tempDiv.innerHTML = separatorHtml;
       return tempDiv.firstChild;
@@ -95,10 +95,10 @@ const slidesInit = () => {
     ratingTest.appendChild(imdbLogo);
     if (typeof rating === "number") {
       const formattedRating = rating.toFixed(1);
-      ratingTest.innerHTML += `${formattedRating} ⭐`;
+      ratingTest.innerHTML += `${formattedRating}`;
     } else {
       console.error("Rating is undefined or not a number:", rating);
-      ratingTest.innerHTML += `N/A ⭐`;
+      ratingTest.innerHTML += `N/A`;
     }
     ratingTest.appendChild(createSeparator());
     const tomatoRatingDiv = document.createElement("div");
@@ -116,7 +116,7 @@ const slidesInit = () => {
     } else {
       valueElement = document.createTextNode(`N/A `);
     }
-    if (criticRating === undefined || criticRating <= 59) {
+    if (criticRating <= 59) {
       criticLogo.src =
         "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Rotten_Tomatoes_rotten.svg/1024px-Rotten_Tomatoes_rotten.svg.png";
       criticLogo.alt = "Rotten Tomato";
@@ -128,9 +128,8 @@ const slidesInit = () => {
     tomatoLogo.style.height = "17px";
     criticLogo.style.width = "15px";
     criticLogo.style.height = "15px";
-    tomatoRatingDiv.appendChild(tomatoLogo);
-    tomatoRatingDiv.appendChild(valueElement);
     tomatoRatingDiv.appendChild(criticLogo);
+    tomatoRatingDiv.appendChild(valueElement);
     tomatoRatingDiv.appendChild(createSeparator());
     const ageRatingDiv = document.createElement("div");
     ageRatingDiv.className = "age-rating";
