@@ -1,4 +1,4 @@
-# Jellyfin-Media-Bar - Now with Play Now Function
+# Jellyfin-Media-Bar forked from [MakD](https://github.com/MakD/Jellyfin-Media-Bar)
 
 ## TODO - Design changes upcoming next release
 
