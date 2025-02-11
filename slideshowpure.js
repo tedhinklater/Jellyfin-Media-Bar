@@ -1,5 +1,5 @@
 const slidesInit = () => {
-  const shuffleInterval = 115000;
+  const shuffleInterval = 15000;
   let isTransitioning = false;
   const listFileName = `${window.location.origin}/web/avatars/list.txt`;
   const jsonCredentials = sessionStorage.getItem("json-credentials");
