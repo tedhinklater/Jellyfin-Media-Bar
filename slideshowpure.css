@@ -717,17 +717,18 @@
   .play-button {
     background-color: rgba(12, 109, 162, 0.85);
     color: #ffffff;
+	border: solid 2px;
   }
 
   .detail-button {
     background-color: rgba(12, 109, 162, 0.85);
-    border: solid 1.5px rgba(12, 109, 162, 0.8);
+	border: solid 2px;
 	color: #fff;
   }
 
-  .play-button:hover,
-  .detail-button:hover {
-    opacity: 0.8;
+.play-button:hover, 
+.detail-button:hover {
+    background-color: rgba(12, 109, 162);
   }
 
   .play-icon,
