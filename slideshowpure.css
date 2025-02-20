@@ -302,7 +302,7 @@
 	top: calc(50% + 75px);
 	left: 7.4em;
 	text-align: center;
-	color: #FFDB41;
+	color: #FFE471;
 	font-family: "Titillium Web", sans-serif;
 	z-index: 4;
 	font-weight: 200;
@@ -482,18 +482,18 @@
 
   .dots-container {
     position: absolute;
-    bottom: 11%;
+    top: 9%;
     left: 50%;
     transform: translateX(-50%) scale(0.6);
     z-index: 2;
     display: flex;
     gap: 5px;
-    background-color: #ffffff00;
+    background-color: #00000038;
     border-radius: 50px;
     justify-content: center;
     align-items: center;
     width: 140px;
-    height: 22px;
+    height: 17px;
     transition: opacity 0.5s ease-in-out;
   }
 
@@ -510,17 +510,18 @@
   .dot.active {
     width: 32px;
     height: 12px;
-    background-color: rgba(12, 110, 162, 0.7);
+    background-color: rgb(17, 154, 216);
     border-radius: 10px;
   }
 
   #slides-container {
     position: relative;
-    width: 92vw;
-    height: 650px;
+    width: 100vw;
+    height: 570px;
     overflow: hidden;
     margin: 0 auto;
-    border-radius: 10px;
+    margin-top: -3em;
+	margin-bottom: -1em;
   }
 
   .slide {
@@ -543,11 +544,11 @@
   }
   .logo {
     position: absolute;
-    bottom: 28%;
+    bottom: 29%;
     left: 50%;
     transform: translateX(-50%);
-    max-height: 60%;
-    max-width: 80%;
+    max-height: 20%;
+    max-width: 93%;
     width: auto;
     z-index: 4;
     filter: brightness(1.5);
@@ -558,11 +559,10 @@
     top: 45px;
     left: 0;
     width: 100%;
-    height: calc(100% - 50px);
+    height: calc(85% - 50px);
     object-fit: cover;
     object-position: center 20%;
     z-index: 1;
-    border-radius: 13px;
     mask-image: linear-gradient(
       to top,
       rgba(0, 0, 0, 0) 10%,
@@ -583,9 +583,8 @@
     left: 0;
     width: 100%;
     height: calc(100% - 50px);
-    background: rgba(0, 0, 0, 0.55);
+    background: rgba(0, 0, 0, 0.21);
     z-index: 2;
-    border-radius: 13px;
     pointer-events: none;
     mask-image: linear-gradient(
       to top,
@@ -603,18 +602,18 @@
 
   .genre {
     position: absolute;
-    bottom: 16%;
+    bottom: 15%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(25%);
     text-align: center;
-    color: #fff;
+    color: #FFF;
     width: 90%;
     max-width: 100%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     font-family: "Titillium Web", sans-serif;
-    font-size: 1.1em;
+    font-size: 0.8em;
     font-weight: 500;
     z-index: 4;
     box-sizing: border-box;
@@ -627,23 +626,28 @@
     bottom: 20%;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 1.1em;
+    font-size: 0.8em;
     color: #fff;
     z-index: 5;
     width: 100%;
   }
   .rating-value {
-    font-family: "Titillium Web", sans-serif;
-    font-weight: 500;
+	font-family: "Titillium Web", sans-serif;
     display: flex;
     align-items: center;
+    margin: 0 1em;
+    z-index: 5;
+    position: relative;
+    top: 0.5em;
+    gap: 0.5em;
   }
   .date {
     font-family: "Titillium Web", sans-serif;
     font-weight: 500;
     display: flex;
     align-items: center;
-    margin-left: 2px;
+    margin-right: 7px;
+    margin-left: 7px;
   }
   .tomato-rating {
     display: flex;
@@ -653,10 +657,14 @@
     margin-right: 3px;
   }
   .critic-logo {
-    margin-left: 3px;
+    margin-right: 5px;
+	width: 13px !important;
+	height: 13px !important;
   }
   .imdb-logo {
-    margin-right: 3px;
+    margin-right: 0px;
+	width: 25px !important;
+	height: 25px !important;
   }
   .age-rating {
     display: flex;
@@ -668,10 +676,9 @@
     font-weight: 600;
     white-space: nowrap;
     padding: 0 0.4em;
+	margin-right: 5px;
   }
   .separator-icon {
-    margin-left: 5px;
-    margin-right: 5px;
     font-size: 1px;
     color: aquamarine;
   }
@@ -708,13 +715,14 @@
   }
 
   .play-button {
-    background-color: rgb(12, 109, 162);
+    background-color: rgba(12, 109, 162, 0.85);
     color: #ffffff;
   }
 
   .detail-button {
-    background-color: rgba(12, 109, 162, 0.5);
+    background-color: rgba(12, 109, 162, 0.85);
     border: solid 1.5px rgba(12, 109, 162, 0.8);
+	color: #fff;
   }
 
   .play-button:hover,
