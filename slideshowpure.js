@@ -116,7 +116,7 @@ const slidesInit = async () => {
     const plotElement = document.createElement("div");
     plotElement.className = "plot";
     plotElement.textContent = plot;
-    truncateText(plotElement, 360);
+    truncateText(plotElement, 400);
 
     const plotContainer = document.createElement("div");
     plotContainer.className = "plot-container";
