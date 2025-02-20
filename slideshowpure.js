@@ -47,7 +47,7 @@ const slidesInit = async () => {
     return;
   }
   window.hasInitializedSlideshow = !0;
-  const shuffleInterval = 115000;
+  const shuffleInterval = 15000;
   let isTransitioning = !1;
   const listFileName = `${window.location.origin}/web/avatars/list.txt`;
 
