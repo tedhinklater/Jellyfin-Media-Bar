@@ -1,50 +1,54 @@
-/**
- * Credentials for a given server
- * @typedef {Object} ServerCredentials
- * @property {string} Id
- * @property {string} AccessToken
- */
-
-/**
- * Credentials
- * @typedef {Object} Credentials
- * @property {ServerCredentials[]} Servers
- */
-
-/**
- * Fetches the credentials inside of localstorage
- * @returns {{token: string, userId: string}} Credential resource
- */
 const getJellyfinCredentials = () => {
   const jellyfinCreds = localStorage.getItem("jellyfin_credentials");
-
   try {
-    /**
-     * @type {Credentials}
-     */
     const serverCredentials = JSON.parse(jellyfinCreds);
-
     const firstServer = serverCredentials.Servers[0];
-
     if (!firstServer) {
       console.error("Could not find credentials for the client");
       return;
     }
-
     return { token: firstServer.AccessToken, userId: firstServer.UserId };
   } catch (e) {
     console.error("Could not parse jellyfin credentials", e);
   }
 };
 
-const slidesInit = () => {
+const initLoadingScreen = () => {
+  const currentPath = window.location.href.toLowerCase();
+  if (
+    currentPath.includes("/web/#/home.html") ||
+    currentPath.includes("/web/index.html#/home.html") ||
+    currentPath.endsWith("/web/")
+  ) {
+    const loadingHTML = `
+      <div class="bar-loading" id="page-loader">
+          <h1>
+              <img src="https://raw.githubusercontent.com/jellyfin/jellyfin-ux/refs/heads/master/branding/android/logo_clean.svg" 
+                  alt="Server Logo" 
+                  style="width: 250px; height: auto;">
+          </h1>
+          <div class="docspinner">
+              <div class="spinner-layer"></div>
+          </div>
+      </div>`;
+    document.body.insertAdjacentHTML("beforeend", loadingHTML);
+    const interval = setInterval(() => {
+      if (document.querySelector(".manualLoginForm")) {
+        $(".bar-loading").fadeOut(700, () => $(".bar-loading").remove());
+        clearInterval(interval);
+      }
+    }, 100);
+  }
+};
+initLoadingScreen();
+const slidesInit = async () => {
   if (window.hasInitializedSlideshow) {
     console.log("Slideshow already initialized. Skipping re-init.");
     return;
   }
-  window.hasInitializedSlideshow = true;
-  const shuffleInterval = 15000;
-  let isTransitioning = false;
+  window.hasInitializedSlideshow = !0;
+  const shuffleInterval = 115000;
+  let isTransitioning = !1;
   const listFileName = `${window.location.origin}/web/avatars/list.txt`;
 
   const { token, userId } = getJellyfinCredentials();
@@ -85,6 +89,7 @@ const slidesInit = () => {
     backdrop.className = "backdrop";
     backdrop.src = `${window.location.origin}/Items/${itemId}/Images/Backdrop/0`;
     backdrop.alt = "Backdrop";
+	backdrop.loading = "eager";
 
     const backdropOverlay = document.createElement("div");
     backdropOverlay.className = "backdrop-overlay";
@@ -98,10 +103,17 @@ const slidesInit = () => {
     logo.className = "logo";
     logo.src = `${window.location.origin}/Items/${itemId}/Images/Logo`;
     logo.alt = "Logo";
+    logo.loading = "eager";
+    const logoImgBlur = document.createElement("img");
+    logoImgBlur.src = `${window.location.origin}/Items/${itemId}/Images/Logo`;
+    logoImgBlur.alt = item.Name || "Title";
+    logoImgBlur.loading = "eager";
+    logoImgBlur.className = "featured-logo-blur";
 
     const logoContainer = document.createElement("div");
     logoContainer.className = "logo-container";
     logoContainer.appendChild(logo);
+	logoContainer.appendChild(logoImgBlur);
 
     const featuredContent = document.createElement("div");
     featuredContent.className = "featured-content";
@@ -213,7 +225,6 @@ const slidesInit = () => {
     premiereDate.textContent = isNaN(year) ? "N/A" : year;
 
     ratingTest.appendChild(tomatoRatingDiv);
-    ratingTest.appendChild(calendarIcon);
     ratingTest.appendChild(premiereDate);
     ratingTest.appendChild(ageRatingDiv);
     ratingTest.appendChild(runTimeElement);
@@ -235,13 +246,13 @@ const slidesInit = () => {
     infoContainer.appendChild(ratingTest);
     // Create a container for the buttons
     const buttonContainer = document.createElement("div");
-    buttonContainer.className = "button-container"; // Add a class for styling
+    buttonContainer.className = "button-container";
 
     // Create the Play button
     const playButton = document.createElement("button");
     playButton.className = "play-button";
     playButton.innerHTML = `
-  <span class="play-icon"><i class="material-icons play_circle_outline"></i></span>
+  <span class="play-icon"><i class="material-icons">play_circle_fill</i></span>
   <span class="play-text">Play</span>
 `;
     playButton.onclick = async () => {
@@ -274,9 +285,9 @@ const slidesInit = () => {
         // Initiate playback using PlaybackManager
         window.PlaybackManager.play({
           items: [item],
-          startPositionTicks: 0, // Start from beginning
-          isMuted: false,
-          isPaused: false,
+          startPositionTicks: 0,
+          isMuted: !1,
+          isPaused: !1,
         })
           .then(() => {
             console.log("Playback started successfully.");
@@ -301,8 +312,8 @@ const slidesInit = () => {
     };
 
     // Append buttons to the button container
-    buttonContainer.appendChild(playButton);
     buttonContainer.appendChild(detailButton);
+    buttonContainer.appendChild(playButton);
 
     // Append all elements to the slide
     slide.append(
@@ -446,11 +457,11 @@ const slidesInit = () => {
     let containerFocused = !1;
     const updateCurrentSlide = (index) => {
       if (isTransitioning) return;
-      isTransitioning = true;
+      isTransitioning = !0;
       currentSlideIndex = (index + slides.length) % slides.length;
       showSlide(currentSlideIndex);
       setTimeout(() => {
-        isTransitioning = false;
+        isTransitioning = !1;
       }, 500);
     };
     const openActiveSlide = () => {
@@ -510,6 +521,46 @@ const slidesInit = () => {
     rightArrow.innerHTML = '<i class="material-icons arrow_forward_ios"></i>';
     container.appendChild(leftArrow);
     container.appendChild(rightArrow);
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const minSwipeDistance = 50;
+    let isTouchOnButton = false;
+
+    container.addEventListener(
+      "touchstart",
+      (event) => {
+        touchStartX = event.touches[0].clientX;
+        isTouchOnButton =
+          event.target.closest(".play-button, .detail-button") !== null;
+      },
+      { passive: false }
+    );
+    container.addEventListener(
+      "touchmove",
+      (event) => {
+        touchEndX = event.touches[0].clientX;
+      },
+      { passive: false }
+    );
+
+    container.addEventListener(
+      "touchend",
+      (event) => {
+        if (isTouchOnButton) return;
+
+        const swipeDistance = touchEndX - touchStartX;
+        if (Math.abs(swipeDistance) > minSwipeDistance) {
+          event.preventDefault();
+          event.stopPropagation();
+          if (swipeDistance < 0) {
+            updateCurrentSlide(currentSlideIndex + 1);
+          } else {
+            updateCurrentSlide(currentSlideIndex - 1);
+          }
+        }
+      },
+      { passive: false }
+    );
     leftArrow.addEventListener("click", () =>
       updateCurrentSlide(currentSlideIndex - 1)
     );
@@ -537,6 +588,7 @@ const slidesInit = () => {
     items = shuffleArray(items);
     await createSlidesForItems(items);
     initializeSlideshow();
+    $(".bar-loading").fadeOut(700, () => $(".bar-loading").remove());
   };
   initializeSlides();
 };
