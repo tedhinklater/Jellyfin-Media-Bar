@@ -104,16 +104,10 @@ const slidesInit = async () => {
     logo.src = `${window.location.origin}/Items/${itemId}/Images/Logo`;
     logo.alt = "Logo";
     logo.loading = "eager";
-    const logoImgBlur = document.createElement("img");
-    logoImgBlur.src = `${window.location.origin}/Items/${itemId}/Images/Logo`;
-    logoImgBlur.alt = item.Name || "Title";
-    logoImgBlur.loading = "eager";
-    logoImgBlur.className = "featured-logo-blur";
 
     const logoContainer = document.createElement("div");
     logoContainer.className = "logo-container";
     logoContainer.appendChild(logo);
-	logoContainer.appendChild(logoImgBlur);
 
     const featuredContent = document.createElement("div");
     featuredContent.className = "featured-content";
