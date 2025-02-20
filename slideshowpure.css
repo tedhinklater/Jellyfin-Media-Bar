@@ -101,7 +101,7 @@
 
   .dots-container {
     position: absolute;
-    bottom: 3%;
+    bottom: 5%;
     left: 0;
     right: 0;
     z-index: 2;
@@ -141,12 +141,13 @@
   }
 
   #slides-container {
-    position: relative;
+	position: relative;
     width: 100vw;
-    height: 650px;
+    height: 823px;
     overflow: hidden;
     margin: 0 auto;
-    border-radius: 15px;
+    margin-top: -4em;
+    margin-bottom: -2.5em;
   }
 
   .slide {
@@ -169,11 +170,11 @@
   }
 
   .backdrop-container {
-    position: relative;
-    top: -40%;
-    right: -35%;
-    width: 70%;
-    height: 100%;
+	position: relative;
+	top: -45%;
+	right: -35%;
+	width: 65%;
+	height: 106%;
   }
 
   .backdrop {
@@ -232,13 +233,13 @@
 
   .logo {
 	position: relative;
-    max-height: 94%;
+    max-height: 85%;
     max-width: 100%;
     height: auto;
     width: auto;
     object-fit: contain;
     z-index: 4;
-    top: 4em;
+    top: 6em;
     left: 5em;
   }
 
@@ -280,7 +281,7 @@
     -webkit-box-orient: vertical;
     left: 7.9em;
     position: absolute;
-    top: 184px;
+    top: 200px;
 	filter: drop-shadow(0 0 2px rgba(2, 2, 2, 0.8));
 	font-weight: 500;
   }
@@ -347,8 +348,8 @@
   .age-rating {
     display: flex;
     align-items: center;
-    margin-left: 5px;
-    margin-right: 5px;
+	margin-left: 10px;
+    margin-right: 10px;
     border-radius: 5px;
     background: rgb(255 255 255 / 0.8);
     color: #000;
