@@ -1,3 +1,3 @@
 # Jellyfin-Media-Bar forked from [MakD](https://github.com/MakD/Jellyfin-Media-Bar)
 
-![Screenshot 2025-02-16 193038](https://github.com/user-attachments/assets/aa2bd33a-3933-4442-98f5-4b4e122743a2)
+![Screenshot 2025-02-20 034436](https://github.com/user-attachments/assets/03ccfb8d-36a5-4277-8e6a-762582676fed)
