@@ -1,6 +1,41 @@
 @import url("https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
-
+.bar-loading {
+  z-index: 99999999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0 0 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.bar-loading h1 img {
+  opacity: 1;
+  display: block;
+  z-index: 999999999 !important;
+  visibility: visible;
+}
+.docspinner {
+  width: 10px;
+  height: 10px;
+  margin: 0;
+  position: initial;
+  border-radius: 50%;
+  border: 4px solid #fff0;
+  border-top-color: #fff;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 @media only screen and (min-width: 767px) {
   div[data-role="page"].page {
     overflow-y: scroll;
@@ -32,7 +67,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 24px;
+    font-size: 12px;
     cursor: pointer;
     color: white;
     z-index: 3;
@@ -56,15 +91,17 @@
 
   .left-arrow {
     left: 20px;
+    font-size: 12px;
   }
 
   .right-arrow {
     right: 20px;
+    font-size: 12px;
   }
 
   .dots-container {
     position: absolute;
-    bottom: 5%;
+    bottom: 3%;
     left: 0;
     right: 0;
     z-index: 2;
@@ -167,7 +204,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.4);
     border-radius: 5px;
     z-index: 2;
     mask-image: linear-gradient(
@@ -200,9 +237,24 @@
     height: auto;
     width: auto;
     object-fit: contain;
-    z-index: 3;
-    top: 5em;
+    z-index: 4;
+    top: 4em;
     left: 8em;
+  }
+  
+  .featured-logo-blur {
+	position: absolute;
+	top: 8em;
+	left: 12em;
+	max-height: 70%;
+	max-width: 85%;
+	height: auto;
+	width: auto;
+	object-fit: contain;
+	scale: 1.25;
+	filter: blur(1rem);
+	z-index: 3;
+	opacity: 0.15;
   }
 
   .featured-content {
@@ -223,7 +275,7 @@
     position: absolute;
     bottom: 0;
     color: #fff;
-    width: 90%;
+    width: 50%;
     height: 60%;
     font-size: 15px;
     padding: 10px 0 25px 15px;
@@ -239,43 +291,36 @@
   .plot {
     display: -webkit-box;
     line-clamp: 4;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     left: 7.9em;
     position: absolute;
-    top: 190px;
+    top: 184px;
+	filter: drop-shadow(0 0 2px rgba(2, 2, 2, 0.8));
+	font-weight: 500;
   }
 
   .gradient-overlay {
     position: absolute;
     top: 0;
     left: 0;
-    width: 70%;
+    width: 90%;
     height: 100%;
-    background: linear-gradient(to right, #000 49%, rgba(0, 0, 0, 0) 70%);
+    background: linear-gradient(90deg, rgb(0% 0% 0%) 0%, rgb(0% 0% 0% / 0.9999847412109375) 6.25%, rgb(0% 0% 0% / 0.999755859375) 12.5%, rgb(0% 0% 0% / 0.9987640380859375) 18.75%, rgb(0% 0% 0% / 0.99609375) 25%, rgba(0, 0, 0, 0.99) 31.25%, rgba(0, 0, 0, 0.98) 37.5%, rgba(0, 0, 0, 0.96) 43.75%, rgba(0, 0, 0, 0.94) 50%, rgba(0, 0, 0, 0.9) 56.25%, rgba(0, 0, 0, 0.55) 65%, rgba(0, 0, 0, 0.35) 70%, rgba(0, 0, 0, 0.15) 75%, rgba(0, 0, 0, 0.05) 80%, rgba(0, 0, 0, 0) 85%, rgba(0, 0, 0, 0) 100%);
     z-index: 2;
-    mask-image: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0) 8%,
-      rgba(0, 0, 0, 0.5) 10%,
-      rgba(0, 0, 0, 1) 12%
-    );
-    -webkit-mask-image: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0) 8%,
-      rgba(0, 0, 0, 0.5) 10%,
-      rgba(0, 0, 0, 1) 12%
-    );
+    mask-image: linear-gradient( to top, rgba(0, 0, 0, 0) 8%, rgba(0, 0, 0, 0.5) 10%, rgba(0, 0, 0, 1) 12% );
+    -webkit-mask-image: linear-gradient( to top, rgba(0, 0, 0, 0) 8%, rgba(0, 0, 0, 0.5) 10%, rgba(0, 0, 0, 1) 12% );
   }
   .genre {
-    position: absolute;
-    top: calc(50% + 75px);
-    left: 8.4em;
-    text-align: center;
-    color: #fff;
-    font-family: "Titillium Web", sans-serif;
-    font-size: 14px;
-    z-index: 4;
+	position: absolute;
+	top: calc(50% + 75px);
+	left: 7.4em;
+	text-align: center;
+	color: #FFDB41;
+	font-family: "Titillium Web", sans-serif;
+	z-index: 4;
+	font-weight: 200;
+	letter-spacing: 2px;
   }
   .info-container {
     position: absolute;
@@ -291,7 +336,7 @@
     font-family: "Titillium Web", sans-serif;
     display: flex;
     align-items: center;
-    margin: 0 6em;
+    margin: 0 5.3em;
     z-index: 5;
     position: relative;
     top: 1.5em;
@@ -355,7 +400,7 @@
   }
   .button-container {
     position: absolute;
-    top: calc(50% + 190px); /* Same as the previous button positions */
+    top: calc(54% + 184px); /* Same as the previous button positions */
     left: 7.5em;
     display: flex;
     gap: 2em; /* Space between buttons */
@@ -379,12 +424,12 @@
   }
 
   .play-button {
-    background-color: #ffffff;
-    color: #000;
+    background-color: rgb(12, 109, 162);
+    color: #fff;
   }
 
   .detail-button {
-    background-color: rgba(255, 255, 255, 0);
+    background-color: rgba(12, 109, 162, 0.5);
     color: #fff;
   }
 
@@ -415,6 +460,7 @@
     color: rgba(255, 255, 255, 0.6);
     z-index: 4;
     -webkit-tap-highlight-color: transparent;
+    display: none;
   }
 
   .left-arrow {
@@ -518,6 +564,19 @@
     max-height: 60%;
     max-width: 80%;
     width: auto;
+    z-index: 4;
+    filter: brightness(1.5);
+  }
+  .featured-logo-blur {
+    position: absolute;
+    bottom: 28%;
+    left: 50%;
+    transform: translateX(-50%);
+    max-height: 60%;
+    max-width: 80%;
+    width: auto;
+    scale: 1.01;
+    filter: blur(1.1rem);
     z-index: 3;
   }
 
@@ -676,13 +735,13 @@
   }
 
   .play-button {
-    background-color: #ffffff;
-    color: #000;
+    background-color: rgb(12, 109, 162);
+    color: #ffffff;
   }
 
   .detail-button {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #fff;
+    background-color: rgba(12, 109, 162, 0.5);
+    border: solid 1.5px rgba(12, 109, 162, 0.8);
   }
 
   .play-button:hover,
